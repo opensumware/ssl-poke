@@ -1,4 +1,39 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.github.jengelman.gradle.plugins:shadow:4.0.4'
+	}
+}
+
 apply plugin: 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+repositories {
+	mavenCentral()
+	jcenter()
+}
+
+compileJava {
+  sourceCompatibility = 1.6
+  targetCompatibility = 1.6
+}
+
+
+dependencies {
+	compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.53'	
+}
+
+
+ shadowJar {
+   baseName = 'ssl-poke'
+   classifier = null
+   version = 'full'
+}
+
+
 jar {
   manifest {
     attributes(
